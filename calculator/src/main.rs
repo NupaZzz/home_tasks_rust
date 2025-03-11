@@ -26,18 +26,41 @@ fn read_input(prompt: &str) -> String {
     input.trim().to_string()
 }
 
+fn calculation(a: f64, b: f64, op: char) -> f64 {
+    match op {
+        '+' => add(a, b),
+        '-' => sub(a, b),
+        '*' => mul(a, b),
+        '/' => {
+            if b != 0.0 {
+                div(a, b)
+            } else {
+                println!("На ноль делить нельзя!");
+                0.0
+            }
+        }
+        _ => panic!("Неверная операция"),
+    }
+}
+
 fn main() {
     println!("Калькулятор");
 
-    // Чтение первого числа
-    let number_one: f64 = read_input("Введите первое число: ")
-        .parse()
-        .expect("Неверный формат числа!");
+    let number_one: f64 = match read_input("Введите первое число: ").parse() {
+        Ok(num) => num,
+        Err(_) => {
+            println!("Ошибка: Введите число!");
+            return;
+        }
+    };
 
-    // Чтение второго числа
-    let number_two: f64 = read_input("Введите второе число: ")
-        .parse()
-        .expect("Неверный формат числа!");
+    let number_two: f64 = match read_input("Введите второе число: ").parse() {
+        Ok(num) => num,
+        Err(_) => {
+            println!("Ошибка: Введите число!");
+            return;
+        }
+    };
 
     // Чтение операции
     let op_input = read_input("Введите операцию (+, -, *, /): ");
@@ -46,19 +69,6 @@ fn main() {
         return;
     }
     let operation = op_input.chars().next().unwrap();
-
-    // Выбор операции через match
-    match operation {
-        '+' => println!("{} + {} = {}", number_one, number_two, add(number_one, number_two)),
-        '-' => println!("{} - {} = {}", number_one, number_two, sub(number_one, number_two)),
-        '*' => println!("{} * {} = {}", number_one, number_two, mul(number_one, number_two)),
-        '/' => {
-            if number_two == 0.0 {
-                println!("На ноль делить нельзя!");
-            } else {
-                println!("{} / {} = {}", number_one, number_two, div(number_one, number_two))
-            }
-        }
-        _ => println!("Неверная операция"),
-    }
+    let result = calculation(number_one, number_two, operation);
+    println!("Результат: {}", result);
 }
