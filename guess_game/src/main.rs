@@ -46,6 +46,20 @@ fn day_of_week() {
     }
 }
 
+fn output_numbers() {
+    print!("Введите число: ");
+    match user_input().trim().parse() {
+        Ok(input) => {
+            for i in 1..=input {
+                println!("{i}");
+            }
+        }
+        Err(_) => {
+            println!("Ошибка: Введите число!");
+        }
+    }
+}
+
 fn main() {
     print!("Введите число от 1 до 6 что бы выбрать задание: ");
     let input: i32 = user_input()
@@ -62,7 +76,10 @@ fn main() {
             println!("Вы выбрали задание: {input}!");
             day_of_week()
         },
-        3 => println!("Задание 3"),
+        3 => {
+            println!("Вы выбрали задание: {input}!");
+            output_numbers()
+        },
         4 => println!("Задание 4"),
         5 => println!("Задание 5"),
         6 => println!("Задание 6"),
