@@ -60,6 +60,24 @@ fn output_numbers() {
     }
 }
 
+fn factorial() {
+    print!("Введите число что бы узнать его факториал: ");
+    match user_input().trim().parse::<i32>() {
+        Ok(mut input) => {
+            if input == 0 {
+                println!("Факториал не существует!");
+            }
+            while input > 0 {
+                println!("{input}");
+                input -= 1;
+            }
+        }
+        Err(_) => {
+            println!("Ошибка: Введите число!");
+        }
+    }
+}
+
 fn main() {
     print!("Введите число от 1 до 6 что бы выбрать задание: ");
     let input: i32 = user_input()
@@ -80,7 +98,10 @@ fn main() {
             println!("Вы выбрали задание: {input}!");
             output_numbers()
         },
-        4 => println!("Задание 4"),
+        4 => {
+            println!("Вы выбрали задание: {input}!");
+            factorial();
+        }
         5 => println!("Задание 5"),
         6 => println!("Задание 6"),
         _ => println!("Ошибка: Введите число от 1 до 6!"),
