@@ -65,6 +65,8 @@ fn factorial() {
     match user_input().trim().parse::<i32>() {
         Ok(mut input) => {
             if input == 0 {
+                println!("0! = 1");
+            } else if input < 0 {
                 println!("Факториал не существует!");
             }
             while input > 0 {
