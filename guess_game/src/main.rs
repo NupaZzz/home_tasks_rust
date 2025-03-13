@@ -69,10 +69,16 @@ fn factorial() {
             } else if input < 0 {
                 println!("Факториал не существует!");
             }
+            let result = input;
+            let mut factorial = 1;
+            let mut vector = vec![];
             while input > 0 {
-                println!("{input}");
+                factorial *= input;
+                vector.push(input);
                 input -= 1;
             }
+            let vector = vector.iter().map(|x| x.to_string()).collect::<Vec<String>>().join(" * ");
+            println!("{}! = {} = {}", result, vector, factorial);
         }
         Err(_) => {
             println!("Ошибка: Введите число!");
