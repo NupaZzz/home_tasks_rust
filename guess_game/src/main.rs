@@ -88,9 +88,38 @@ fn factorial() {
 }
 
 fn guess_number() {
-    println!("Загадано число от 1 до 100, попробуйте его угадать!");
+    print!(
+        "Загадано число от 1 до 100, попробуйте его угадать! А сейчас выберите сложность игры (1 - лёгкая, 2 - средняя, 3 - сложная): "
+    );
+    let mut difficulty = 0;
+    match user_input()
+        .trim()
+        .parse::<i32>() {
+            Ok(input) => {
+                match input {
+                    1 => {
+                        difficulty = 10;
+                    },
+                    2 => {
+                        difficulty = 6;   
+                    },
+                    3 => {
+                        difficulty = 4;
+                        
+                    },
+                    _ => {
+                        println!("Ошибка: Введите число от 1 до 3!");
+                    }
+                }
+            }
+            Err(_) => {
+                println!("Ошибка: Введите число!");
+            }
+        }
+        
+    println! ("У вас есть {difficulty} попыток!");
     let secret_number = rand::thread_rng().gen_range(1..=100);
-    for count in 1..=5 {
+    for count in 1..=difficulty {
         print! ("Попытка {count}, введите число: ");
         match user_input()
             .trim()
