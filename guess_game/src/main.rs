@@ -90,10 +90,7 @@ fn factorial() {
 fn guess_number() {
     println!("Загадано число от 1 до 100, попробуйте его угадать!");
     let secret_number = rand::thread_rng().gen_range(1..=100);
-    let mut count = 0;
-
-    loop {
-        count += 1;
+    for count in 1..=5 {
         print! ("Попытка {count}, введите число: ");
         match user_input()
             .trim()
@@ -112,11 +109,8 @@ fn guess_number() {
                     println!("Ошибка: Введите число!");
                 }
             }
-        if count == 5 {
-            println!("Вы исчерпали все попытки! Загаданое число было {secret_number}!");
-            break;
         }
-    }
+    println!("Вы исчерпали все попытки! Загаданое число было {secret_number}!");
 }
 
 fn main() {
