@@ -12,7 +12,7 @@ fn user_input() -> String {
     input.trim().to_string()
 }
 
-fn five_numers() {
+fn five_numbers() {
     let mut count = 0;
     let mut vec: Vec<i32> = Vec::new();
     loop {
@@ -40,7 +40,7 @@ fn main() {
             match input {
                 1 => {
                     println!("Вы выбрали задание: {input}");
-                    five_numers();
+                    five_numbers();
                 },
                 2 => {
                     println!("Вы выбрали задание: {input}");
