@@ -1,4 +1,5 @@
 use std::io::{self, Write};
+use rand::Rng;
 
 fn user_input() -> String {
     let mut input = String::new();
@@ -86,6 +87,35 @@ fn factorial() {
     }
 }
 
+fn guess_number() {
+    println!("Загадано число от 1 до 100, попробуйте его угадать!");
+    let secret_number = rand::thread_rng().gen_range(1..=100);
+    let mut count = 0;
+
+    loop {
+        count += 1;
+        print! ("Попытка {count}, введите число: ");
+        let guess: i32 = user_input()
+            .trim()
+            .parse()
+            .expect("Ошибка: Введите число!");
+
+        if guess == secret_number {
+            println!("Поздравляю! Вы угадали число {secret_number} за {count} попыток!");
+            break;
+        } else if guess < secret_number {
+            println!("Слишком маленькое число!");
+        } else if guess > secret_number {
+            println!("Слишком большое число!");
+        }
+
+        if count == 5 {
+            println!("Вы исчерпали все попытки! Загаданое число было {secret_number}!");
+            break;
+        }   
+    }
+}
+
 fn main() {
     print!("Введите число от 1 до 6 что бы выбрать задание: ");
     let input: i32 = user_input()
@@ -110,7 +140,10 @@ fn main() {
             println!("Вы выбрали задание: {input}!");
             factorial();
         }
-        5 => println!("Задание 5"),
+        5 => {
+            println!("Вы выбрали задание: {input}!");
+            guess_number();
+        }
         6 => println!("Задание 6"),
         _ => println!("Ошибка: Введите число от 1 до 6!"),
     }
