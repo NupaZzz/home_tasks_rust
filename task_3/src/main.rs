@@ -13,20 +13,23 @@ fn user_input() -> String {
 }
 
 fn five_numers() {
-    print!("Введите число 1: ");
+    let mut count = 0;
     let mut vec: Vec<i32> = Vec::new();
-    vec.push(user_input().parse().unwrap());
-    print!("Введите число 2: ");
-    vec.push(user_input().parse().unwrap());
-    print!("Введите число 3: ");
-    vec.push(user_input().parse().unwrap());
-    print!("Введите число 4: ");
-    vec.push(user_input().parse().unwrap());
-    print!("Введите число 5: ");
-    vec.push(user_input().parse().unwrap());
-
-    for num in &vec {
-        println!("Число в векторе: {}", *num);
+    loop {
+        print!("Введите число: ");
+        match user_input().parse::<i32>() {
+            Ok(num) => {
+                vec.push(num);
+                count += 1;
+                if count == 5 {
+                    println!("Вектор: {:?}", vec);
+                    break;
+                }
+            },
+            Err(_) => {
+                println!("Ошибка: Введите число!");
+            }
+        }
     }
 }
 
