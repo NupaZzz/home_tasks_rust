@@ -95,24 +95,27 @@ fn guess_number() {
     loop {
         count += 1;
         print! ("Попытка {count}, введите число: ");
-        let guess: i32 = user_input()
+        match user_input()
             .trim()
-            .parse()
-            .expect("Ошибка: Введите число!");
-
-        if guess == secret_number {
-            println!("Поздравляю! Вы угадали число {secret_number} за {count} попыток!");
-            break;
-        } else if guess < secret_number {
-            println!("Слишком маленькое число!");
-        } else if guess > secret_number {
-            println!("Слишком большое число!");
-        }
-
+            .parse::<i32>() {
+                Ok(guess) => {
+                    if guess == secret_number {
+                        println!("Поздравляю! Вы угадали число {secret_number} за {count} попыток!");
+                        break;
+                    } else if guess < secret_number {
+                        println!("Слишком маленькое число!");
+                    } else if guess > secret_number {
+                        println!("Слишком большое число!");
+                    }
+                }
+                Err(_) => {
+                    println!("Ошибка: Введите число!");
+                }
+            }
         if count == 5 {
             println!("Вы исчерпали все попытки! Загаданое число было {secret_number}!");
             break;
-        }   
+        }
     }
 }
 
