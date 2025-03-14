@@ -56,6 +56,15 @@ fn student_info() {
     }
 }
 
+fn join_strings() {
+    print!("Введите строку один: ");
+    let mut s = user_input();
+    print!("Введите строку два: ");
+    s.push_str(&user_input());
+
+    println!("{}", s);
+}
+
 fn main() {
     print!("Выберите задание: ");
     match user_input().trim().parse::<i32>() {
@@ -71,6 +80,7 @@ fn main() {
                 },
                 3 => {
                     println!("Вы выбрали задание: {input}");
+                    join_strings();
                 },
                 4 => {
                     println!("Вы выбрали задание: {input}");
