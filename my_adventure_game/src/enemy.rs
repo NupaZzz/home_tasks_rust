@@ -22,7 +22,7 @@ impl Enemy {
     }
 
     pub fn attack(&self, player: &mut Player) {
-        player.health -= self.damage;
+        player.current_health -= self.damage;
         sleep(Duration::from_secs_f64(0.5));
         
     }

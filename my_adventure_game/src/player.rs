@@ -4,9 +4,9 @@ use std::thread::sleep;
 
 pub struct Player {
     pub name: String,
-    pub health: i32,
+    pub current_health: i32,
     pub health_max: i32,
-    pub mana: u32,
+    pub current_mana: u32,
     pub mana_max: u32,
     pub damage: i32,
     pub gold: u32,
@@ -19,9 +19,9 @@ impl Player {
     pub fn new(name: String) -> Self {
         Self {
             name,
-            health: 100,
+            current_health: 100,
             health_max: 100,
-            mana: 100,
+            current_mana: 100,
             mana_max: 100,
             damage: 1,
             gold: 0,
@@ -38,12 +38,12 @@ impl Player {
 
     pub fn show_stats(&self) -> String {
         format!(
-            "{}: {} Уровень ({} здоровья, {} маны), {} золота, {} урона", self.name, self.level, self.health, self.mana, self.gold, self.damage
+            "{}: {} Уровень ({} здоровья, {} маны), {} золота, {} урона", self.name, self.level, self.current_health, self.current_mana, self.gold, self.damage
         )
     }
 
     pub fn is_alive(&self) -> bool {
-        self.health > 0
+        self.current_health > 0
     }
 
     pub fn level_up(&mut self) {
@@ -52,8 +52,8 @@ impl Player {
         self.health_max += 10;
         self.mana_max += 5;
         self.damage += 1;
-        self.health = self.health_max;
-        self.mana = self.mana_max;
+        self.current_health = self.health_max;
+        self.current_mana = self.mana_max;
         println!(
             "Поздравляем! Вы достигли {} уровня! Ваши характеристики повышены!", self.level
         )
@@ -71,11 +71,11 @@ impl Player {
     }
 
     pub fn restore_mana(&mut self) {
-        self.mana = self.mana_max;
+        self.current_mana = self.mana_max;
     }
 
     pub fn restore_health(&mut self) {
-        self.health = self.health_max;
+        self.current_health = self.health_max;
     }
 
     pub fn player_rest(&mut self) {
