@@ -1,5 +1,6 @@
 use crate::enemy::Enemy;
 use crate::player::Player;
+use crate::user_input::get_user_input;
 
 pub fn enemy_spawn() -> Enemy {
     let enemy = Enemy::new();
@@ -40,7 +41,29 @@ pub fn game_loop(player: &mut Player, enemy: &mut Enemy) {
 
 pub fn game_start(player: &mut Player) {
     loop {
-        let mut enemy = enemy_spawn();
-        game_loop(player, &mut enemy);
+        println!("1.Пойти в приключение");
+        println!("2.Отдохнуть");
+        println!("3.Показать статистику");
+        print!("Выберите действие: ");
+        let user_choice = get_user_input()
+            .trim()
+            .parse::<i32>()
+            .map_err(|_| "Неверный ввод. Пожалуйста, введите число.");
+        match user_choice {
+            Ok(1) => {
+                let mut enemy = enemy_spawn();
+                game_loop(player, &mut enemy);
+            }
+            Ok(2) => {
+                player.player_rest();
+                println!("Вы отдохнули и восстановили здоровье и ману.");
+            }
+            Ok(3) => {
+                println!("{}", player.show_stats());
+            }
+            _ => {
+                println!("Неверный выбор. Пожалуйста, введите 1 или 2.");
+            }
+        }
     }
 }
