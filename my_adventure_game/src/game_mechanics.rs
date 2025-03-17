@@ -42,7 +42,7 @@ pub fn game_start(player: &mut Player, enemy: &mut Enemy) {
                 enemy.spawn_and_alert(player);
             }
             Ok(2) => {
-                player.player_rest();
+                println!("{}", player.player_rest());
             }
             Ok(3) => {
                 println!("{}", player.show_stats());

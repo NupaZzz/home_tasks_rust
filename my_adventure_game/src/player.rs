@@ -46,7 +46,7 @@ impl Player {
         self.current_health > 0
     }
 
-    pub fn level_up(&mut self) {
+    pub fn level_up(&mut self) -> String {
         self.level += 1;
         self.exp_to_next_level *= 2;
         self.health_max += 10;
@@ -54,7 +54,7 @@ impl Player {
         self.damage += 1;
         self.current_health = self.health_max;
         self.current_mana = self.mana_max;
-        println!(
+        format!(
             "Поздравляем! Вы достигли {} уровня! Ваши характеристики повышены!", self.level
         )
     }
@@ -62,7 +62,7 @@ impl Player {
     pub fn add_exp(&mut self, exp: i32) {
         self.current_exp += exp;
         if self.current_exp >= self.exp_to_next_level {
-            self.level_up();
+            println!("{}",self.level_up());
         }
     }
 
@@ -78,12 +78,12 @@ impl Player {
         self.current_health = self.health_max;
     }
 
-    pub fn player_rest(&mut self) {
+    pub fn player_rest(&mut self) -> String {
         println!("Вы отдыхаете...");
         sleep(Duration::from_secs_f64(2.0));
         self.restore_health();
         self.restore_mana();
-        println!("Вы отдохнули и восстановили здоровье и ману.");
+        format!("Вы отдохнули и восстановили здоровье и ману.")
     }
 }
 
