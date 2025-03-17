@@ -33,9 +33,10 @@ impl Enemy {
         }
     }
 
-    pub fn attack(&self, player: &mut Player) {
+    pub fn attack(&self, player: &mut Player) -> String{
         player.current_health -= self.damage;
         sleep(Duration::from_secs_f64(0.5));
+        format!("Враг атаковал вас и нанес {} урона", self.damage)
         
     }
 

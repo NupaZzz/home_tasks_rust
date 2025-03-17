@@ -31,9 +31,10 @@ impl Player {
         }
     }
 
-    pub fn attack(&mut self, enemy: &mut Enemy) {
+    pub fn attack(&mut self, enemy: &mut Enemy) -> String {
         enemy.health -= self.damage;
         sleep(Duration::from_secs_f64(0.5));
+        format!("Вы атаковали врага и нанесли ему {}", self.damage)
     }
 
     pub fn show_stats(&self) -> String {

@@ -10,12 +10,12 @@ pub fn show_stats(player: &Player, enemy: &Enemy) {
 pub fn game_loop(player: &mut Player, enemy: &mut Enemy) {
     loop {
         show_stats(player, enemy);
-        enemy.attack(player);
+        println!("{}", enemy.attack(player));
         if !player.is_alive() {
             println!("Вы погибли. Игра окончена.");
             std::process::exit(0);
         }
-        player.attack(enemy);
+        println!("{}",player.attack(enemy));
         if !enemy.is_alive() {
             println!("Вы победили врага и получили {} золота и {} опыта.",
                      enemy.gold_reward, enemy.exp_reward);
