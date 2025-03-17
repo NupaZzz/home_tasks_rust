@@ -44,6 +44,7 @@ pub fn game_start(player: &mut Player) {
         println!("1.Пойти в приключение");
         println!("2.Отдохнуть");
         println!("3.Показать статистику");
+        println!("4.Выйти из игры");
         print!("Выберите действие: ");
         let user_choice = get_user_input()
             .trim()
@@ -60,6 +61,10 @@ pub fn game_start(player: &mut Player) {
             }
             Ok(3) => {
                 println!("{}", player.show_stats());
+            }
+            Ok(4) => {
+                println!("Выход из игры...");
+                std::process::exit(0);
             }
             _ => {
                 println!("Неверный выбор. Пожалуйста, введите 1 или 2.");
