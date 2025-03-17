@@ -6,10 +6,10 @@ use crate::game_mechanics::game_loop;
 
 pub struct Enemy {
     pub name: String,
-    pub health: i32,
-    pub damage: i32,
-    pub gold_reward: i32,
-    pub exp_reward: i32,
+    pub health: u32,
+    pub damage: u32,
+    pub gold_reward: u32,
+    pub exp_reward: u32,
 }
 
 impl Enemy {

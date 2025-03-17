@@ -5,15 +5,15 @@ use rand::random;
 
 pub struct Player {
     pub name: String,
-    pub current_health: i32,
-    pub health_max: i32,
+    pub current_health: u32,
+    pub health_max: u32,
     pub current_mana: u32,
     pub mana_max: u32,
-    pub damage: i32,
-    pub gold: i32,
-    pub level: i32,
-    pub current_exp: i32,
-    pub exp_to_next_level: i32,
+    pub damage: u32,
+    pub gold: u32,
+    pub level: u32,
+    pub current_exp: u32,
+    pub exp_to_next_level: u32,
 }
 
 impl Player {
@@ -63,7 +63,7 @@ impl Player {
         )
     }
 
-    pub fn add_exp(&mut self, exp: i32) {
+    pub fn add_exp(&mut self, exp: u32) {
         self.current_exp += exp;
         if self.current_exp >= self.exp_to_next_level {
             println!(
@@ -73,7 +73,7 @@ impl Player {
         }
     }
 
-    pub fn add_gold(&mut self, gold: i32) {
+    pub fn add_gold(&mut self, gold: u32) {
         self.gold += gold;
     }
     
@@ -96,7 +96,7 @@ impl Player {
         );
         sleep(Duration::from_secs_f64(2.0));
         let chance = random::<f32>();
-        if chance < 0.05 {
+        if chance < 0.1 {
             println!(
                 "Пока вы спали вас ограбили! Вы потеряли {} золота",
                 self.gold * 50/100
