@@ -8,7 +8,7 @@ pub struct Enemy {
     pub name: String,
     pub health: i32,
     pub damage: i32,
-    pub gold_reward: u32,
+    pub gold_reward: i32,
     pub exp_reward: i32,
 }
 

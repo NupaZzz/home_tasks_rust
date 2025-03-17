@@ -1,6 +1,7 @@
 use crate::enemy::Enemy;
 use std::time::Duration;
 use std::thread::sleep;
+use rand::random;
 
 pub struct Player {
     pub name: String,
@@ -9,7 +10,7 @@ pub struct Player {
     pub current_mana: u32,
     pub mana_max: u32,
     pub damage: i32,
-    pub gold: u32,
+    pub gold: i32,
     pub level: i32,
     pub current_exp: i32,
     pub exp_to_next_level: i32,
@@ -72,8 +73,13 @@ impl Player {
         }
     }
 
-    pub fn add_gold(&mut self, gold: u32) {
+    pub fn add_gold(&mut self, gold: i32) {
         self.gold += gold;
+    }
+    
+    pub fn rob_gold(&mut self) {
+        let amount = self.gold * 50/100;
+        self.gold -= amount;
     }
 
     pub fn restore_mana(&mut self) {
@@ -89,6 +95,14 @@ impl Player {
             "Вы отдыхаете..."
         );
         sleep(Duration::from_secs_f64(2.0));
+        let chance = random::<f32>();
+        if chance < 0.05 {
+            println!(
+                "Пока вы спали вас ограбили! Вы потеряли {} золота",
+                self.gold * 50/100
+            );
+            self.rob_gold();
+        }
         self.restore_health();
         self.restore_mana();
         format!(
