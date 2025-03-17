@@ -2,6 +2,7 @@ use crate::player::Player;
 use std::time::Duration;
 use std::thread::sleep;
 use rand::Rng;
+use crate::game_mechanics::game_loop;
 
 pub struct Enemy {
     pub name: String,
@@ -44,5 +45,18 @@ impl Enemy {
 
     pub fn is_alive(&self) -> bool {
         self.health > 0
+    }
+
+    pub fn spawn_and_alert(&self, player: &mut Player) {
+        let mut enemy = if player.level >= 2 {
+            let enemy = Enemy::new_enemy_beast();
+            println!("Вы встретили {}", enemy.name);
+            enemy
+        } else {
+            let enemy = Enemy::new_enemy();
+            println!("Вы встретили {}", enemy.name);
+            enemy
+        };
+        game_loop(player, &mut enemy);
     }
 }
