@@ -3,7 +3,13 @@ use crate::player::Player;
 use crate::user_input::get_user_input;
 
 pub fn enemy_spawn() -> Enemy {
-    let enemy = Enemy::new();
+    let enemy = Enemy::new_enemy();
+    println!("Вы встретили {}", enemy.name);
+    enemy
+}
+
+pub fn enemy_spawn_beast() -> Enemy {
+    let enemy = Enemy::new_enemy_beast();
     println!("Вы встретили {}", enemy.name);
     enemy
 }
@@ -52,7 +58,11 @@ pub fn game_start(player: &mut Player) {
             .map_err(|_| "Неверный ввод. Пожалуйста, введите число.");
         match user_choice {
             Ok(1) => {
-                let mut enemy = enemy_spawn();
+                let mut enemy = if player.level >= 2 {
+                    enemy_spawn_beast()
+                } else {
+                    enemy_spawn()
+                };
                 game_loop(player, &mut enemy);
             }
             Ok(2) => {

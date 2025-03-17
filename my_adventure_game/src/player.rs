@@ -81,6 +81,8 @@ impl Player {
     pub fn player_rest(&mut self) {
         self.restore_health();
         self.restore_mana();
+        println!("Вы отдыхаете...");
+        sleep(Duration::from_secs_f64(2.0));
     }
 }
 

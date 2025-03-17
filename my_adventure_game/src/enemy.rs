@@ -1,6 +1,7 @@
 use crate::player::Player;
 use std::time::Duration;
 use std::thread::sleep;
+use rand::Rng;
 
 pub struct Enemy {
     pub name: String,
@@ -11,13 +12,23 @@ pub struct Enemy {
 }
 
 impl Enemy {
-    pub fn new() -> Self {
+    pub fn new_enemy() -> Self {
         Self {
             name: String::from("Вражина"),
             health: 5,
-            damage: 2,
+            damage: rand::thread_rng().gen_range(1..=2),
             gold_reward: 1,
             exp_reward: 10,
+        }
+    }
+
+    pub fn new_enemy_beast() -> Self {
+        Self {
+            name: String::from("Бестия"),
+            health: 10,
+            damage: rand::thread_rng().gen_range(2..=4),
+            gold_reward: 2,
+            exp_reward: 20,
         }
     }
 
@@ -28,7 +39,7 @@ impl Enemy {
     }
 
     pub fn show_stats(&self) -> String {
-        format!("{}: {} здоровья", self.name, self.health)
+        format!("{}: {} здоровья, {} урона", self.name, self.health, self.damage)
     }
 
     pub fn is_alive(&self) -> bool {
