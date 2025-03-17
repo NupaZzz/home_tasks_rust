@@ -36,12 +36,18 @@ impl Enemy {
     pub fn attack(&self, player: &mut Player) -> String{
         player.current_health -= self.damage;
         sleep(Duration::from_secs_f64(0.5));
-        format!("Враг атаковал вас и нанес {} урона", self.damage)
+        format!(
+            "Враг атаковал вас и нанес {} урона",
+            self.damage
+        )
         
     }
 
     pub fn show_stats(&self) -> String {
-        format!("{}: {} здоровья, {} урона", self.name, self.health, self.damage)
+        format!(
+            "{}: {} здоровья, {} урона",
+            self.name, self.health, self.damage
+        )
     }
 
     pub fn is_alive(&self) -> bool {
@@ -51,11 +57,17 @@ impl Enemy {
     pub fn spawn_and_alert(&self, player: &mut Player) {
         let mut enemy = if player.level >= 2 {
             let enemy = Enemy::new_enemy_beast();
-            println!("Вы встретили {}", enemy.name);
+            println!(
+                "Вы встретили {}",
+                enemy.name
+            );
             enemy
         } else {
             let enemy = Enemy::new_enemy();
-            println!("Вы встретили {}", enemy.name);
+            println!(
+                "Вы встретили {}",
+                enemy.name
+            );
             enemy
         };
         game_loop(player, &mut enemy);
