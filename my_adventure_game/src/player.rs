@@ -83,6 +83,7 @@ impl Player {
         sleep(Duration::from_secs_f64(2.0));
         self.restore_health();
         self.restore_mana();
+        println!("Вы отдохнули и восстановили здоровье и ману.");
     }
 }
 

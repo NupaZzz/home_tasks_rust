@@ -43,7 +43,6 @@ pub fn game_start(player: &mut Player, enemy: &mut Enemy) {
             }
             Ok(2) => {
                 player.player_rest();
-                println!("Вы отдохнули и восстановили здоровье и ману.");
             }
             Ok(3) => {
                 println!("{}", player.show_stats());
