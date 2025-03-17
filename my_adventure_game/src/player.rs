@@ -5,8 +5,8 @@ use rand::random;
 
 pub struct Player {
     pub name: String,
-    pub current_health: u32,
-    pub health_max: u32,
+    pub current_health: i32,
+    pub health_max: i32,
     pub current_mana: u32,
     pub mana_max: u32,
     pub damage: u32,
@@ -33,7 +33,7 @@ impl Player {
     }
 
     pub fn attack(&mut self, enemy: &mut Enemy) -> String {
-        enemy.health -= self.damage;
+        enemy.health -= self.damage as i32;
         sleep(Duration::from_secs_f64(0.5));
         format!("Вы атаковали врага и нанесли ему {}", self.damage)
     }

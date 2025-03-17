@@ -6,7 +6,7 @@ use crate::game_mechanics::game_loop;
 
 pub struct Enemy {
     pub name: String,
-    pub health: u32,
+    pub health: i32,
     pub damage: u32,
     pub gold_reward: u32,
     pub exp_reward: u32,
@@ -34,7 +34,7 @@ impl Enemy {
     }
 
     pub fn attack(&self, player: &mut Player) -> String{
-        player.current_health -= self.damage;
+        player.current_health -= self.damage as i32;
         sleep(Duration::from_secs_f64(0.5));
         format!(
             "Враг атаковал вас и нанес {} урона",
