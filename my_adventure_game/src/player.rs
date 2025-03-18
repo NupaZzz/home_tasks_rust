@@ -2,6 +2,7 @@ use crate::enemy::Enemy;
 use std::time::Duration;
 use std::thread::sleep;
 use rand::random;
+use crate::shop::Item as ShopItem;
 
 pub struct Player {
     pub name: String,
@@ -18,6 +19,30 @@ pub struct Player {
 
 pub struct Inventory {
     pub gold: u32,
+    pub items: Vec<Item>,
+}
+
+#[derive(Clone)]
+pub struct Item {
+    pub name: String,
+    pub price: u32,
+    pub description: String,
+    pub effect: String,
+    pub durability: u32,
+    pub attack: u32,
+}
+
+impl From<ShopItem> for Item {
+    fn from(shop_item: ShopItem) -> Self {
+        Item {
+            name: shop_item.name,
+            price: shop_item.price,
+            description: shop_item.description,
+            effect: shop_item.effect,
+            durability: shop_item.durability,
+            attack: shop_item.attack,
+        }
+    }
 }
 
 impl Player {
@@ -32,7 +57,7 @@ impl Player {
             current_exp: 0,
             exp_to_next_level: 100,
             level: 1,
-            inventory: vec![Inventory { gold: 0}],
+            inventory: vec![Inventory { gold: 100, items: vec![]}],
         }
     }
 
@@ -116,9 +141,24 @@ impl Player {
 
     pub fn show_inventory(&self) -> String {
         format!(
-            "Инвентарь: {} золота",
-            self.inventory[0].gold
+            "Инвентарь: {} золота.\nПредметы: {}",
+            self.inventory[0].gold,
+            self.inventory[0].items.iter().map(|item| item.name.clone()).collect::<Vec<_>>().join(", ")
         )
+    }
+
+    pub fn equip_item(&mut self, item_name: &str) {
+        for item in &mut self.inventory[0].items {
+            if item_name == item.name {
+                if item.durability > 0 {
+                    self.damage += item.attack;
+                    item.durability -= 1;
+                    println!("Вы экипировали {} и увеличили урон на {}", item.name, item.attack);
+                } else {
+                    println!("{} сломан", item.name);
+                }
+            }
+        }
     }
 }
 

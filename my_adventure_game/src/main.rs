@@ -3,6 +3,7 @@ mod user_input;
 mod main_menu;
 mod game_mechanics;
 mod enemy;
+mod shop;
 
 use user_input::get_user_input;
 use main_menu::{

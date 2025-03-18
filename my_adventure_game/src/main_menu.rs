@@ -2,6 +2,7 @@ use crate::user_input::get_user_input;
 use crate::player::Player;
 use crate::game_mechanics::game_start;
 use crate::enemy::Enemy;
+use crate::shop::Shop;
 
 pub fn start_new_game() {
     print!("Введите имя вашего пресонажа: ");
@@ -9,7 +10,8 @@ pub fn start_new_game() {
     let mut player = Player::new(String::from(player_name));
     println!("Добро пожаловать в игру, {}", player.name);
     let mut enemy = Enemy::new_enemy();
-    game_start(&mut player, &mut enemy);
+    let mut shop = Shop::new();
+    game_start(&mut player, &mut enemy, &mut shop);
 
 }
 
