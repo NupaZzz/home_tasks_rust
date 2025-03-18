@@ -10,10 +10,14 @@ pub struct Player {
     pub current_mana: u32,
     pub mana_max: u32,
     pub damage: u32,
-    pub gold: u32,
     pub level: u32,
     pub current_exp: u32,
     pub exp_to_next_level: u32,
+    pub inventory: Vec<Inventory>,
+}
+
+pub struct Inventory {
+    pub gold: u32,
 }
 
 impl Player {
@@ -25,10 +29,10 @@ impl Player {
             current_mana: 100,
             mana_max: 100,
             damage: 1,
-            gold: 0,
             current_exp: 0,
             exp_to_next_level: 100,
             level: 1,
+            inventory: vec![Inventory { gold: 0}],
         }
     }
 
@@ -40,8 +44,8 @@ impl Player {
 
     pub fn show_stats(&self) -> String {
         format!(
-            "{}: {} Уровень ({} здоровья, {} маны), {} золота, {} урона",
-            self.name, self.level, self.current_health, self.current_mana, self.gold, self.damage
+            "{}: {} Уровень ({} здоровья, {} маны), {} урона",
+            self.name, self.level, self.current_health, self.current_mana, self.damage
         )
     }
 
@@ -74,12 +78,12 @@ impl Player {
     }
 
     pub fn add_gold(&mut self, gold: u32) {
-        self.gold += gold;
+        self.inventory[0].gold += gold;
     }
     
     pub fn rob_gold(&mut self) {
-        let amount = self.gold * 50/100;
-        self.gold -= amount;
+        let amount = self.inventory[0].gold * 50/100;
+        self.inventory[0].gold -= amount;
     }
 
     pub fn restore_mana(&mut self) {
@@ -99,7 +103,7 @@ impl Player {
         if chance < 0.1 {
             println!(
                 "Пока вы спали вас ограбили! Вы потеряли {} золота",
-                self.gold * 50/100
+                self.inventory[0].gold * 50/100
             );
             self.rob_gold();
         }
@@ -107,6 +111,13 @@ impl Player {
         self.restore_mana();
         format!(
             "Вы отдохнули и восстановили здоровье и ману."
+        )
+    }
+
+    pub fn show_inventory(&self) -> String {
+        format!(
+            "Инвентарь: {} золота",
+            self.inventory[0].gold
         )
     }
 }
