@@ -9,7 +9,6 @@ pub fn show_stats(player: &Player, enemy: &Enemy) {
 
 pub fn game_loop(player: &mut Player, enemy: &mut Enemy) {
     loop {
-        show_stats(player, enemy);
         println!("{}", enemy.attack(player));
         if !player.is_alive() {
             println!("Вы погибли. Игра окончена.");
@@ -24,6 +23,7 @@ pub fn game_loop(player: &mut Player, enemy: &mut Enemy) {
             break;
         }
     }
+    show_stats(player, enemy);
 }
 
 pub fn game_start(player: &mut Player, enemy: &mut Enemy) {
